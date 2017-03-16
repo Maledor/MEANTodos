@@ -9,6 +9,7 @@ var mongoURI = process.env.MONGOURI || require('./secrets').mongoURI;
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
+server.use(express.static(__dirname + '/public'));
 
 server.get('/', function(request, response){
   response.sendFile('index.html', {root: __dirname + '/public/html'});
