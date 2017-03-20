@@ -1,4 +1,4 @@
 (function(){
   angular.module('MEANTodos', []); //setter syntax
 
-})();  //immediately invoked functional expression
+})(); //immediately invoked functional expression
