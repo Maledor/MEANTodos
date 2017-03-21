@@ -8,13 +8,28 @@
   </head>
   <body>
     <div ng-controller='TodoController'>
-      {{ message }}
-      <input type="text" ng-model="greeting">
-      {{ greeting }}
-      <button ng-click='print(greeting)'>Click</button>
+      <input type="text" ng-model='newTodo.description'>
+      <button ng-click='addTodo(newTodo)'>Add Todo</button>
+      <hr>
+      <ul>
+        <li ng-repeat='todo in todos'>
+          <div ng-hide='todo.edit'>
+            <input type="checkbox"
+            ng-model='todo.completed'
+            ng-change='update(todo)'>
+            <span ng-class='{strikethrough: todo.completed}'>{{ todo.description }}</span>
+              <button ng-click='edit(todo)'>E</button>
+              <button ng-click='deleteTodo(todo)'>&times;</button>
+          </div>
+          <div ng-show='todo.edit'>
+            <input type="text" ng-model='todo.description'>
+            <button ng-click='update(todo)'>Update</button>
+          </div>
+        </li>
+      </ul>
       </div>
-
       <script src="js/app.js"></script>
+      <script src="js/controllers/todo.controller.js"></script>
       <script src="js/controllers/todo.controllers.js"></script>
   </body>
 </html>

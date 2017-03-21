@@ -1,9 +1,9 @@
 var express = require('express');
-var todoRouter = express.Router();
+var router = express.Router();
 var Todo = require('../models/todo.model');
 
 //GET /todos
-todoRouter.get('/todos', function(req, res){
+router.get('/todos', function(req, res){
   Todo.find({}, function(err, documents){
     if(err){
       res.status(500).json({
@@ -17,7 +17,7 @@ todoRouter.get('/todos', function(req, res){
   });
 });
 //GET /todos/:id
-todoRouter.get('/todos/:id', function(req, res){
+router.get('/todos/:id', function(req, res){
   Todo.find({_id: req.params.id}, function(err, documents){
     if(err){
       res.status(500).json({
@@ -31,7 +31,7 @@ todoRouter.get('/todos/:id', function(req, res){
   });
 });
 //POST /todos
-todoRouter.post('/todos', function(req, res){
+router.post('/todos', function(req, res){
   var todo = new Todo(req.body);
   todo.save(function(err, document){
     if(err){
@@ -40,13 +40,13 @@ todoRouter.post('/todos', function(req, res){
       });
     } else{
       res.status(201).json({
-        msg: 'Success'
+        msg: 'Successfully created a new todo'
       });
     }
   });
 });
 //PUT /todos/:id
-todoRouter.put('/todos/:id', function(req, res){
+router.put('/todos/:id', function(req, res){
   Todo.findOneAndUpdate({_id: req.params.id}, req.body, function(err, document){
     if(err){
       res.status(500).json({
@@ -60,7 +60,7 @@ todoRouter.put('/todos/:id', function(req, res){
   });
 });
 //DELETE /todos/:id
-todoRouter.delete('/todos/:id', function(req, res){
+router.delete('/todos/:id', function(req, res){
   Todo.remove({_id: req.params.id}, function(err, document){
     if(err){
       res.status(500).json({
@@ -74,4 +74,4 @@ todoRouter.delete('/todos/:id', function(req, res){
   });
 });
 
-module.exports = todoRouter;
+module.exports = router;
