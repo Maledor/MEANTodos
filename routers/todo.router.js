@@ -33,7 +33,7 @@ router.get('/todos/:id', function(req, res){
 //POST /todos
 router.post('/todos', function(req, res){
   var todo = new Todo(req.body);
-  todo.save(function(err, document){
+  todo.save(function(err){
     if(err){
       res.status(500).json({
         msg: err
@@ -61,7 +61,7 @@ router.put('/todos/:id', function(req, res){
 });
 //DELETE /todos/:id
 router.delete('/todos/:id', function(req, res){
-  Todo.remove({_id: req.params.id}, function(err, document){
+  Todo.remove({_id: req.params.id}, function(err){
     if(err){
       res.status(500).json({
         msg: err
